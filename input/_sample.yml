@@ -1,0 +1,7 @@
+servers:
+  - name: ServerName-ASDF
+    address: server1.domain
+    username: user@domain.com
+  - name: ServerName-FDSA
+    address: server2.domain
+    username: user@domain.com
