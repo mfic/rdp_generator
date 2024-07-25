@@ -1,6 +1,7 @@
 import yaml
 from jinja2 import Environment, FileSystemLoader
 from pathlib import Path
+import shutil
 
 
 def load_yaml(file_path: str) -> dict:
@@ -38,10 +39,23 @@ def select_customer_file(customer_files: list) -> str:
     return customer_files[selected_idx]
 
 
+def clear_output_directory(output_dir: str):
+    if Path(output_dir).exists():
+        user_input = (
+            input(
+                f"Do you want to clear the folder '{output_dir}' before generating new sessions? (yes/no): "
+            )
+            .strip()
+            .lower()
+        )
+        if user_input == "yes":
+            shutil.rmtree(output_dir)
+            print(f"Cleared the folder '{output_dir}'.")
+
+
 def main():
     input_dir = "input"
     template_path = "templates/template.rdp.j2"
-    output_dir = "output"
 
     customer_files = list_customer_files(input_dir)
     if not customer_files:
@@ -55,6 +69,9 @@ def main():
     if not servers:
         print("No servers found in the configuration.")
         return
+
+    output_dir = f"output/{selected_file.stem}"
+    clear_output_directory(output_dir)
 
     generate_rdp_files(template_path, servers, output_dir)
 
