@@ -11,7 +11,7 @@ Generates `.rdp` connection files from a Jinja2 template and a YAML server list.
 ## Prerequisites
 
 - Python 3.10+
-- Install dependencies: `pipenv install` (or `pip install jinja2 pyyaml`)
+- Install dependencies: `pip install -r requirements.txt`
 
 ## Input file format
 
