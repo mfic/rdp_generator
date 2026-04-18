@@ -29,6 +29,23 @@ servers:
 
 A sample file is provided at `input/_sample.yml`.
 
+## Generating the input file from Active Directory
+
+If your servers are in Active Directory, use the included PowerShell script to generate the YAML automatically:
+
+```powershell
+.\Get-ADServers.ps1
+```
+
+The script will:
+1. Query AD for all machines with a `Windows Server` operating system
+2. Ask for a default username (e.g. `user@domain.com`) applied to every entry
+3. Ask for an output file name and write the YAML to `input/<name>.yml`
+
+Review and edit the generated file before running `main.py` — you can adjust addresses, usernames, or remove servers you don't need.
+
+> Requires the `ActiveDirectory` PowerShell module (available via RSAT or on a domain controller).
+
 ## Usage
 
 ```bash
